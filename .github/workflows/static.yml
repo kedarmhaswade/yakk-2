@@ -1,4 +1,4 @@
-name: Build and Publish Notebook Blog (Quarto)
+name: Build and Publish Notebook Blog (Quarto, Notebook-first)
 
 on:
   push:
@@ -14,35 +14,41 @@ jobs:
       id-token: write
 
     steps:
-      # 1. Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. Set up Python
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      # 3. Install Jupyter + ipykernel
-      - name: Install Jupyter and Kernel
+      - name: Install dependencies
         run: |
-          pip install jupyter ipykernel
+          pip install jupyter ipykernel nbformat
           python -m ipykernel install --user --name python3
 
-      # 4. Install Quarto CLI
       - name: Install Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
-      # 5. Clean previous site (optional but recommended)
       - name: Clean previous site
         run: rm -rf blog/_site/*
 
-      # 6. Render Quarto site with executed notebooks
-      - name: Render Quarto Site
-        run: quarto render blog/ --execute 
+      # 🔹 Normalize notebooks to add missing cell IDs
+      - name: Normalize notebooks
+        run: |
+          python - <<EOF
+          from pathlib import Path
+          import nbformat
+          for nb_path in Path("blog").glob("*.ipynb"):
+              nb = nbformat.read(nb_path, as_version=nbformat.NO_CONVERT)
+              nbformat.normalize(nb)  # adds missing id fields
+              nbformat.write(nb, nb_path)
+          EOF
 
-      # 7. Upload rendered _site/ for GitHub Pages
+      # Render notebooks + index.qmd
+      - name: Render Quarto Site
+        run: quarto render blog/ --execute
+
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:

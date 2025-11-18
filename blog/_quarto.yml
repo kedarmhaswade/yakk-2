@@ -3,13 +3,11 @@ project:
   output-dir: _site
 
 website:
-  title: "Yakk-2 Blog"
+  title: "An Artificial Researcher's Blog"
   navbar:
     left:
       - href: index.qmd
         text: Home
-      - href: posts/
-        text: Posts
 
 format:
   html:

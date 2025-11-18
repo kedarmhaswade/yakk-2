@@ -7,10 +7,38 @@
     "text": "This is a demo post rendered by Quarto. You can mix code, Markdown, and plots.\n\nimport sys\nprint(\"Hello, Artificial World!\")\n\nHello, Artificial World!"
   },
   {
+    "objectID": "another-notebook.html",
+    "href": "another-notebook.html",
+    "title": "Another Notebook",
+    "section": "",
+    "text": "Second example post.\n\nfor i in range(3): print('Post number', i+1)\n\nPost number 1\nPost number 2\nPost number 3"
+  },
+  {
+    "objectID": "demo-notebook.html",
+    "href": "demo-notebook.html",
+    "title": "Demo Notebook",
+    "section": "",
+    "text": "This is a sample post for the blog.\n\nprint('Hello, Yakk-2 Blog!')\n\nHello, Yakk-2 Blog!"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Welcome to Yakk-2 Blog",
+    "title": "An Artificial Blog",
     "section": "",
-    "text": "I maintain a blog here. The blog posts pertain to my research interests. Each blog post is a Jupyter notebook."
+    "text": "See all posts"
+  },
+  {
+    "objectID": "index.html#recent-posts",
+    "href": "index.html#recent-posts",
+    "title": "An Artificial Blog",
+    "section": "",
+    "text": "See all posts"
+  },
+  {
+    "objectID": "posts/index.html",
+    "href": "posts/index.html",
+    "title": "All Posts",
+    "section": "",
+    "text": "All Blog Posts\nBelow is a list of all notebook posts:"
   }
 ]
