@@ -1,4 +1,4 @@
-name: Build and Publish Notebook Blog (Quarto, Notebook-first)
+name: Build and Publish Notebook Blog
 
 on:
   push:
@@ -22,7 +22,7 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install dependencies
+      - name: Install Python deps for notebooks
         run: |
           pip install jupyter ipykernel nbformat
           python -m ipykernel install --user --name python3
@@ -31,25 +31,29 @@ jobs:
         uses: quarto-dev/quarto-actions/setup@v2
 
       - name: Clean previous site
-        run: rm -rf blog/_site/*
+        run: rm -rf blog/_site || true
 
-      # 🔹 Normalize notebooks to add missing cell IDs
+      # ---------------------------------------------------
+      # 📌 Normalize all notebooks in "blog/"
+      # ---------------------------------------------------
       - name: Normalize notebooks
         run: |
-          python - <<EOF
-          from pathlib import Path
+          python3 - <<'PY'
           import nbformat
-	  from nbformat.validator import normalize
+          from nbformat.validator import normalize
+          from pathlib import Path
 
-	  blog_dir = Path("blog")
-          for nb_path in Path("blog").glob("*.ipynb"):
-	  	nb = nbformat.read(nb_path, as_version=4)
-		normalize(nb)
-		nbformat.write(nb, nb_path)
-		print("Normalized:", nb_path)
-          EOF
+          blog_dir = Path("blog")
+          for nb_path in blog_dir.glob("*.ipynb"):
+              nb = nbformat.read(nb_path, as_version=4)
+              normalize(nb)
+              nbformat.write(nb, nb_path)
+              print("Normalized:", nb_path)
+          PY
 
-      # Render notebooks + index.qmd
+      # ---------------------------------------------------
+      # 📌 Render blog site (executes notebooks)
+      # ---------------------------------------------------
       - name: Render Quarto Site
         run: quarto render blog/ --execute
 
