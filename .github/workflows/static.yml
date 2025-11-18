@@ -40,7 +40,7 @@ jobs:
 
       # 6. Render Quarto site with executed notebooks
       - name: Render Quarto Site
-        run: quarto render blog/ --execute --kernel python3
+        run: quarto render blog/ --execute 
 
       # 7. Upload rendered _site/ for GitHub Pages
       - name: Upload Pages Artifact
