@@ -39,6 +39,8 @@ jobs:
           python - <<EOF
           from pathlib import Path
           import nbformat
+	  from nbformat.validator import normalize
+	  from pathlib import Path
           for nb_path in Path("blog").glob("*.ipynb"):
               nb = nbformat.read(nb_path, as_version=nbformat.NO_CONVERT)
               nbformat.normalize(nb)  # adds missing id fields
