@@ -37,16 +37,16 @@ jobs:
       - name: Normalize notebooks
         run: |
           python - <<EOF
-	  import nbformat
-          from nbformat.validator import normalize
           from pathlib import Path
+          import nbformat
+	  from nbformat.validator import normalize
 
-          blog_dir = Path("blog")
-          for nb_path in blog_dir.glob("*.ipynb"):
-            nb = nbformat.read(nb_path, as_version=4)
-            normalize(nb)
-            nbformat.write(nb, nb_path)
-            print("Normalized:", nb_path)
+	  blog_dir = Path("blog")
+          for nb_path in Path("blog").glob("*.ipynb"):
+	  	nb = nbformat.read(nb_path, as_version=4)
+		normalize(nb)
+		nbformat.write(nb, nb_path)
+		print("Normalized:", nb_path)
           EOF
 
       # Render notebooks + index.qmd
