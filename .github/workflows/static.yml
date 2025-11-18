@@ -1,4 +1,4 @@
-name: Build and Publish Blog (Quarto)
+name: Build and Publish Notebook Blog (Quarto)
 
 on:
   push:
@@ -14,17 +14,17 @@ jobs:
       id-token: write
 
     steps:
-      # 1. Checkout the repo
+      # 1. Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. Install Python (for Jupyter engine)
+      # 2. Set up Python
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      # 3. Install Jupyter + ipykernel (required for Quarto Python execution)
+      # 3. Install Jupyter + ipykernel
       - name: Install Jupyter and Kernel
         run: |
           pip install jupyter ipykernel
@@ -34,11 +34,15 @@ jobs:
       - name: Install Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
-      # 5. Render only the `blog/` folder
-      - name: Render Quarto Site
-        run: quarto render blog/
+      # 5. Clean previous site (optional but recommended)
+      - name: Clean previous site
+        run: rm -rf blog/_site/*
 
-      # 6. Upload the rendered `_site` folder to Pages
+      # 6. Render Quarto site with executed notebooks
+      - name: Render Quarto Site
+        run: quarto render blog/ --execute --kernel python3
+
+      # 7. Upload rendered _site/ for GitHub Pages
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:

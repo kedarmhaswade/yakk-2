@@ -1,0 +1,16 @@
+[
+  {
+    "objectID": "posts/hello-world.html",
+    "href": "posts/hello-world.html",
+    "title": "Hello from Quarto + Jupyter",
+    "section": "",
+    "text": "This is a demo post rendered by Quarto. You can mix code, Markdown, and plots.\n\nimport sys\nprint(\"Hello, Artificial World!\")\n\nHello, Artificial World!"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome to Yakk-2 Blog",
+    "section": "",
+    "text": "I maintain a blog here. The blog posts pertain to my research interests. Each blog post is a Jupyter notebook."
+  }
+]

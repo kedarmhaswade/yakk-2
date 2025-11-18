@@ -6,14 +6,19 @@ website:
   title: "Yakk-2 Blog"
   navbar:
     left:
-      - href: using-quarto.qmd
+      - href: index.qmd
+        text: Home
+      - href: posts/
+        text: Posts
 
 format:
   html:
     theme: cosmo
     toc: true
-    toc-depth: 3
     code-fold: false
     code-block-bg: true
     code-block-border-left: "#1f6feb"
+
+execute:
+  enabled: true
 

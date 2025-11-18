@@ -1,0 +1,12 @@
+---
+title: "Welcome to Yakk-2 Blog"
+---
+
+# Yakk-2 Blog
+
+I maintain a blog here. The blog posts pertain to my research interests. Each blog post is a Jupyter notebook.
+
+## Recent Posts
+
+```{posts}
+
