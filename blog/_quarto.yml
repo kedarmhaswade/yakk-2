@@ -21,7 +21,10 @@ execute:
 
 format:
   html:
-    theme: journal
+    theme: 
+      light: cosmo
+      dark: superhero
+    css: style.css
     toc: true
     toc-depth: 3
     code-fold: true
