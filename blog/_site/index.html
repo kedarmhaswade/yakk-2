@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>An Artificial Blog – An Artificial Researcher’s Blog</title>
+<title>Welcome to an Artificial Blog – Yakk-2 Artificial Blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -80,7 +80,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">An Artificial Researcher’s Blog</span>
+    <span class="navbar-title">Yakk-2 Artificial Blog</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -93,6 +93,16 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link active" href="./index.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">All Posts</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/kedarmhaswade/yakk-2"> 
+<span class="menu-text">GitHub</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -104,26 +114,15 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#yakk-2-blog" id="toc-yakk-2-blog" class="nav-link active" data-scroll-target="#yakk-2-blog">Yakk-2 Blog</a>
-  <ul class="collapse">
-  <li><a href="#recent-posts" id="toc-recent-posts" class="nav-link" data-scroll-target="#recent-posts">Recent Posts</a></li>
-  </ul></li>
-  <li><a href="#welcome-to-an-artificial-blog" id="toc-welcome-to-an-artificial-blog" class="nav-link" data-scroll-target="#welcome-to-an-artificial-blog">Welcome to an Artificial Blog</a></li>
-  <li><a href="#all-blog-posts" id="toc-all-blog-posts" class="nav-link" data-scroll-target="#all-blog-posts">All Blog Posts</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">An Artificial Blog</h1>
+<h1 class="title">Welcome to an Artificial Blog</h1>
 </div>
 
 
@@ -140,27 +139,17 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="yakk-2-blog" class="level1">
-<h1>Yakk-2 Blog</h1>
-<section id="recent-posts" class="level2">
-<h2 class="anchored" data-anchor-id="recent-posts">Recent Posts</h2>
+<p>I maintain a blog here. The blog posts pertain to my research interests.</p>
+<p>Each blog post is a Jupyter notebook.</p>
+<div id="7c24fb22-ebc0-4ba4-8bdf-9432fed8a456" class="cell" data-execution_count="1">
+<div class="cell-output cell-output-display cell-output-markdown">
 <ul>
-<li><a href="posts/index.html">See all posts</a></li>
+<li><a href="say-hi.html">Hello, World!</a></li>
 </ul>
-</section>
-</section>
-<section id="welcome-to-an-artificial-blog" class="level1">
-<h1>Welcome to an Artificial Blog</h1>
-<p>I maintain a blog here. The blog posts pertain to my research interests. Each blog post is a Jupyter notebook.</p>
-</section>
-<section id="all-blog-posts" class="level1">
-<h1>All Blog Posts</h1>
-<p>import pathlib</p>
-<p>blog_dir = pathlib.Path(“.”) notebooks = sorted(blog_dir.glob(“*.ipynb”))</p>
-<p>for nb in notebooks: html_file = nb.with_suffix(“.html”).name print(f”- <a href="{html_file}">{nb.stem}</a>“)</p>
+</div>
+</div>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

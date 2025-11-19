@@ -1,22 +1,33 @@
 project:
   type: website
-  output-dir: _site
 
 website:
-  title: "An Artificial Researcher's Blog"
+  title: "Yakk-2 Artificial Blog"
   navbar:
     left:
-      - href: index.qmd
-        text: Home
+      - text: Home
+        href: index.html
+      - text: All Posts
+        href: index.html
+    right:
+      - text: GitHub
+        href: https://github.com/kedarmhaswade/yakk-2
+
+execute:
+  enabled: true
+  echo: false
+  warning: false
+  freeze: false
 
 format:
   html:
     theme: cosmo
     toc: true
-    code-fold: false
+    toc-depth: 3
+    code-fold: true
     code-block-bg: true
     code-block-border-left: "#1f6feb"
-
-execute:
-  enabled: true
+    navigation:
+      toc: true
+      prev-next: true
 
