@@ -114,8 +114,14 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#my-workflow" id="toc-my-workflow" class="nav-link active" data-scroll-target="#my-workflow">My Workflow</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -139,9 +145,22 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This is my first blog post, powered by Quarto and GitHub Workflow. I am not exactly happy because it took a half day to set all this up. But now that it is all set up, I can now keep producing some readable blog-posts that are version-controlled.</p>
+<p>This is my first blog post, powered by Quarto and GitHub Workflow. I am not exactly happy because it took a half day to set all this up. But now that it is all set up, I can hopefully produce some readable blog-posts that are version-controlled.</p>
+<section id="my-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="my-workflow">My Workflow</h2>
+<ul>
+<li>Keep my phase-wise notebooks (which are expected to be detailed explorations) up-to-date. I decided not to convert them into a website like this one. Instead, they are just <em>executed notebooks (even with errors to demonstrate something)</em> committed to <a href="https://github.com/kedarmhaswade/yakk-2">my GitHub repo</a>.</li>
+<li>Just see the individual notebooks in <code>phase-1</code>, <code>phase-2</code> etc.</li>
+<li>That is my shortcut to host the notebooks <em>without</em> any explicit hosting overhead! I think it works for me.</li>
+<li>When I want to write a blog-post, I come to this folder (<a href="https://github.com/kedarmhaswade/yakk-2/tree/main/blog"><code>/blog</code></a> of my repository) and create <strong>my blog-post also as a notebook (contains mostly Markdown, but may contain some exploration code-blocks too)</strong>.</li>
+<li>I ask <code>quarto</code> to render the static HTML from these “notebooks as blog-posts”. For the same purpose, I utilize a GitHub workflow for <a href="https://github.com/kedarmhaswade/yakk-2/actions">static HTML</a>.</li>
+<li>After I am done with my blog-post, I render the Quarto website locally and make sure it succeeds and generates the static pages in the <code>_site</code> subfolder of my <code>blog</code> folder.</li>
+<li>On commit and push, GitHub runs my workflow and pushes the static HTML (my blog-posts) to <a href="https://kedarmhaswade.github.io/yakk-2/">this website</a></li>
+<li>Simple, eh?</li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

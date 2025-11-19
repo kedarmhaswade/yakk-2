@@ -11,6 +11,13 @@
     "href": "say-hi.html",
     "title": "Hello, World!",
     "section": "",
-    "text": "This is my first blog post, powered by Quarto and GitHub Workflow. I am not exactly happy because it took a half day to set all this up. But now that it is all set up, I can now keep producing some readable blog-posts that are version-controlled."
+    "text": "This is my first blog post, powered by Quarto and GitHub Workflow. I am not exactly happy because it took a half day to set all this up. But now that it is all set up, I can hopefully produce some readable blog-posts that are version-controlled."
+  },
+  {
+    "objectID": "say-hi.html#my-workflow",
+    "href": "say-hi.html#my-workflow",
+    "title": "Hello, World!",
+    "section": "My Workflow",
+    "text": "My Workflow\n\nKeep my phase-wise notebooks (which are expected to be detailed explorations) up-to-date. I decided not to convert them into a website like this one. Instead, they are just executed notebooks (even with errors to demonstrate something) committed to my GitHub repo.\nJust see the individual notebooks in phase-1, phase-2 etc.\nThat is my shortcut to host the notebooks without any explicit hosting overhead! I think it works for me.\nWhen I want to write a blog-post, I come to this folder (/blog of my repository) and create my blog-post also as a notebook (contains mostly Markdown, but may contain some exploration code-blocks too).\nI ask quarto to render the static HTML from these “notebooks as blog-posts”. For the same purpose, I utilize a GitHub workflow for static HTML.\nAfter I am done with my blog-post, I render the Quarto website locally and make sure it succeeds and generates the static pages in the _site subfolder of my blog folder.\nOn commit and push, GitHub runs my workflow and pushes the static HTML (my blog-posts) to this website\nSimple, eh?"
   }
 ]
