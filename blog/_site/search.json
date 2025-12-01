@@ -4,7 +4,14 @@
     "href": "index.html",
     "title": "Welcome to an Artificial Blog",
     "section": "",
-    "text": "I maintain a blog here. The blog posts pertain to my research interests.\nEach blog post is a Jupyter notebook.\n\n\n\nHello, World!"
+    "text": "I maintain a blog here. The blog posts pertain to my research interests.\nEach blog post is a Jupyter notebook.\n\n\n\nOn Compilers and Interpreters (30 November 2025)\n\n\n\n\nHello, World!"
+  },
+  {
+    "objectID": "compilers-interpreters.html",
+    "href": "compilers-interpreters.html",
+    "title": "On Compilers and Interpreters (30 November 2025)",
+    "section": "",
+    "text": "I wrote this quick blog-post while I was reviewing Python Functions."
   },
   {
     "objectID": "say-hi.html",
