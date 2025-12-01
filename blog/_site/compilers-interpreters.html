@@ -315,13 +315,37 @@ ul.task-list li input[type="checkbox"] {
 </blockquote>
 <p>This statement subtly describes the dual nature of <code>python</code> (the executable), which is both a compiler and an interpreter. It also prompted me to reexamine <em>compilation</em> and <em>interpretation</em> in the context of programming languages. I had always encountered these terms. I simply asked myself: <strong>Do I understand these terms and the difference between them now?</strong></p>
 <p>This blog-post answers that question.</p>
-<p>First, let’s look up the <em>contemporary</em> dictionary meanings of the two verbs: <em>compile</em> and <em>interpret</em>. I have stated the most relevant meanings in a boldface.</p>
-<ul>
+<p>First, let’s look up the <em>contemporary</em> dictionary meanings of the two verbs: <em>compile</em> and <em>interpret</em>. I have stated the meanings most relevant to a computing context in a boldface.</p>
+<ol type="1">
 <li><strong>Compile (v.)</strong>: 1) get or gather together (synonym: to accumulate), 2) put together out of existing material (e.g.&nbsp;compile a list), or 3) <strong>use a computer program (a “compiler”) to translate source code written in a particular programming language into computer-readable machine code that can be executed</strong>.</li>
 <li><strong>Interpret (v.)</strong>: 1) make sense of; assign meaning to (e.g.&nbsp;interpret a message) 2) give rendition of (e.g.&nbsp;a Beethoven sonata) 3) create an image or likeness of (synonym: to represent) 3) <strong>restate words from one language into another language (synonym: to translate)</strong>, or 4) make sense of a language.</li>
-</ul>
-<p>The two most relevant definitions (modified slightly to Python, but it doesn’t matter) are - Compile: Use the <code>python</code> executable to translate a Python program into the Intel microprocessor’s machine code (instructions) which can be <em>run</em> or <em>executed</em> (actual physical changes happen at the semi-conductor level!) - Interpret: Use the <code>python</code> executable to translate or restate the words of Python (e.g.&nbsp;<code>for</code> statements) into another language like Intel microprocessor’s machine code.</p>
-<p>Sadly, both these definitions are insufficient in the modern (in the 2000s and beyond) context of computer programs written in programming languages. The above definition of <em>compile</em> was perhaps made in the 1960s or 70s when to compile was solely to translate a statically-typed source language (e.g.&nbsp;C) program directly into the instructions for the machine.</p>
+</ol>
+<p>Aren’t the relevant definitions confusing? Don’t they mean the same thing (to translate)? Restating (modified slightly to suit Python, but it doesn’t matter) them:</p>
+<ol type="1">
+<li><strong>Compile</strong>: Use the <code>python</code> executable to translate a complete Python program into the Intel microprocessor’s machine code (instructions) which can be <em>run</em> or <em>executed</em> (actual physical changes occur at the semiconductor level!)</li>
+<li><strong>Interpret</strong>: Use the <code>python</code> executable to translate or restate the words from Python (e.g.&nbsp;an assignment like <code>x = 20</code>) into another language like Intel microprocessor’s (x86 64) machine code (something <a href="http://ref.x86asm.net/coder64.html#xC7">like</a> <code>48 c7 c0 01 00 00 00</code> encoded in binary). This is like how a human interpreter interprets a foreign president’s response for the native speakers to <em>understand</em>.</li>
+</ol>
+<p>When a program <em>runs</em> on a computer, the CPU simply executes corresponding instructions one by one.</p>
+<p><strong>Thus, the CPU is the ultimate interpreter or executor which runs the instruction in its machine code</strong>. The CPU does <em>not</em> translate the program written in computer’s RAM in a ‘language’ like <code>48 c7 c0 01 00 00 00</code> into some other language, but it, like a faithful and unerring servant, “directly makes sense of it” by taking actions (thus <em>interpreting</em> it–See meaning #1 of <em>interpret</em> above).</p>
+<p>For a Python program to do anything on a physical machine, therefore, we need two things:</p>
+<ol type="1">
+<li>Our Python program’s code <strong>translated</strong> into a binary machine code (instructions for a CPU).</li>
+<li>A CPU that <strong>interprets</strong> or makes sense of it by taking the instructed actions.</li>
+</ol>
+<p>We now have more nuanced definitions: 1) <strong>Compile</strong>: Translate something from one <em>formal</em> language into another. Formal languages, unlike natural languages, have <em>unambiguous grammars</em>. 2) <strong>Interpret</strong>: Make sense of (well-defined) instructions in a language by taking actions intended therein.</p>
+<p>Until about the 70s (and of course even now), we had a programming language like C in which programmers wrote their programs, a compiler like the <code>gcc</code> (which is itself a big program written in C and compiled into a computer’s machine code) that <em>compiled</em> those C programs into a computer’s machine code, and a machine that <em>interpreted</em> that machine code. A typical workflow was straightforward:</p>
+<ol type="1">
+<li><em>Create</em> a C program file, <code>a.c</code>. This file is not <em>executable</em>.</li>
+<li><em>Compile</em> it: For example, <code>gcc a.c</code>. This creates an <em>executable</em> file <code>a.out</code> which has all the machine instructions. The compiler ensures that <code>a.c</code> is <em>valid</em> C code, and <code>a.out</code> is valid machine code.</li>
+<li><em>Run</em> the executable file: <code>./a.out</code> which loads the instructions in computer’s memory. We didn’t call this step <em>interpretation</em>, although the computer makes sense of (interprets) those instructions.</li>
+</ol>
+<p>This required that different computers had different compilers, although the C program file was the same. You could give your little C program, <code>a.c</code>, to your friend on a floppy, and s/he would compile it on their computer to, say, <code>a.exe</code>, and run it.</p>
+<p>What is a compiler like <code>gcc</code> then? Well, it must be an executable file that has all the instructions for the machine. Its job is to take your C program and produce a corresponding executable. There is of course a <a href="https://bootstrappable.org/">bootstrapping problem</a> here if <code>gcc</code> were <em>not</em> available as a sequence of machine instructions. If <code>gcc</code> was the name of the executable program that was created by compiling a C (or other language) source program, then we must compile that source program somehow!</p>
+<p>Later, the idea of a writing computer programs for a virtual machine came along. That made the term ‘interpreter’ more popular. A compiler translated programs from a source language into an instruction language for the virtual machine. The instructions for the virtual machine were called the <em>bytecode</em>.</p>
+<p>The compiler created the bytecode.</p>
+<p>An interpreter interpreted (made sense of) the bytecode.</p>
+<p>To finally see the physical changes on a real machine, however, interpreter also ran or executed the actual machine code corresponding to the bytecode.</p>
+<p>Two notable programming languages in this regard are Python and Java. Let’s consider Python.</p>
 
 
 
