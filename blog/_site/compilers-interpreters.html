@@ -308,7 +308,20 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>I wrote this quick blog-post while I was reviewing <a href="../../phase-1/day10_pretest.ipynb">Python Functions</a>.</p>
+<p>I wrote this quick blog-post while I was reviewing <a href="https://github.com/kedarmhaswade/yakk-2/blob/main/phase-1/day10_pretest.ipynb">Python Functions</a>.</p>
+<p>I stumbled upon the following statements as I read the <em>Functions</em> section in <em>Python In a Nutshell</em> by Martelli et.al. (with a few changes for context):</p>
+<blockquote class="blockquote">
+<p>When the Python <strong>interpreter</strong> (the <code>python</code> executable on your computer) encounters a <code>def</code> statement in your Python script or REPL, it <strong>compiles</strong> the function body, creating a function object.</p>
+</blockquote>
+<p>This statement subtly describes the dual nature of <code>python</code> (the executable), which is both a compiler and an interpreter. It also prompted me to reexamine <em>compilation</em> and <em>interpretation</em> in the context of programming languages. I had always encountered these terms. I simply asked myself: <strong>Do I understand these terms and the difference between them now?</strong></p>
+<p>This blog-post answers that question.</p>
+<p>First, let’s look up the <em>contemporary</em> dictionary meanings of the two verbs: <em>compile</em> and <em>interpret</em>. I have stated the most relevant meanings in a boldface.</p>
+<ul>
+<li><strong>Compile (v.)</strong>: 1) get or gather together (synonym: to accumulate), 2) put together out of existing material (e.g.&nbsp;compile a list), or 3) <strong>use a computer program (a “compiler”) to translate source code written in a particular programming language into computer-readable machine code that can be executed</strong>.</li>
+<li><strong>Interpret (v.)</strong>: 1) make sense of; assign meaning to (e.g.&nbsp;interpret a message) 2) give rendition of (e.g.&nbsp;a Beethoven sonata) 3) create an image or likeness of (synonym: to represent) 3) <strong>restate words from one language into another language (synonym: to translate)</strong>, or 4) make sense of a language.</li>
+</ul>
+<p>The two most relevant definitions (modified slightly to Python, but it doesn’t matter) are - Compile: Use the <code>python</code> executable to translate a Python program into the Intel microprocessor’s machine code (instructions) which can be <em>run</em> or <em>executed</em> (actual physical changes happen at the semi-conductor level!) - Interpret: Use the <code>python</code> executable to translate or restate the words of Python (e.g.&nbsp;<code>for</code> statements) into another language like Intel microprocessor’s machine code.</p>
+<p>Sadly, both these definitions are insufficient in the modern (in the 2000s and beyond) context of computer programs written in programming languages. The above definition of <em>compile</em> was perhaps made in the 1960s or 70s when to compile was solely to translate a statically-typed source language (e.g.&nbsp;C) program directly into the instructions for the machine.</p>
 
 
 
