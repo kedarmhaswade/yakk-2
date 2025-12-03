@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>On Compilers and Interpreters (30 November 2025) – Yakk-2 Artificial Blog</title>
+<title>Capturing My Attempts to Solve an Intriguing Programming Problem (From 2020 Onward) – Yakk-2 Artificial Blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -326,7 +326,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">On Compilers and Interpreters (30 November 2025)</h1>
+<h1 class="title">Capturing My Attempts to Solve an Intriguing Programming Problem (From 2020 Onward)</h1>
 </div>
 
 
@@ -343,78 +343,107 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>I wrote this quick blog-post while reviewing <a href="https://github.com/kedarmhaswade/yakk-2/blob/main/phase-1/day10_pretest.ipynb">Python Functions</a>.</p>
-<p>I stumbled upon the following statements as I read the <em>Functions</em> section in <em>Python In a Nutshell</em> by Martelli et.al. (with a few changes for context):</p>
+<p>Typically, you write in a blog post about a specific topic and conclude crisply. The process of writing a typical blog post may also not span more than a few days. On this blog, I intend to write blog posts like that. I even started adding dates to their titles to suggest how long they took.</p>
+<p>This blog post, however, is unusual. I plan to narrate my (long) struggle with an intriguing problem. Capturing the writer’s struggles in words, as a hypothetical, omniscient mental and physical monitoring camera might relentlessly do, is challenging. To keep things simple, I will capture my thought processes, rays of hope flashed by in the wee hours of dawns, etc., as shorter, chronological sub-posts below.</p>
+<p>It is not an unsolved problem. People have solved it. However, until I solve it all by myself, it is unsolved for me.</p>
+<p>I had heard the problem statement a few years ago, and I have not been able to solve it yet. I was not working solely on this problem all this time, but I can say that I have been <em>obsessed</em> with it. No line of attack is in sight even now. I can barely withstand the emotional burden of being unable to solve this problem, despite being a CS graduate and professional programmer, but it is becoming unbearable.</p>
+<p>I suspect it is an advanced programming problem. Advanced problems assume some background knowledge. For example, a calculus-1 problem is ‘advanced’ for a high schooler who hasn’t yet grasped the ideas of school algebra and mathematical functions. The same problem may not be ‘advanced’ for a math major.</p>
+<p>Nobody posed this problem to me in person; I read its statement online. I can only judge its maturity level from its context: Ken Thompson, a master programmer and recipient of the <a href="https://en.wikipedia.org/wiki/Turing_Award">ACM Turing Award</a>, posed it during his acceptance speech of the award in 1983. He gradually solved this problem during that speech. By the time his speech ended, we had its solution (and a few other things to ponder about).</p>
+<p>Does that make you nervous? Does the shear <em>intellectual weight</em> of the problem poser and that occasion imply we should read “some theory” first, solve textbook exercises and problems, and only then attempt it?</p>
+<p>Or I can do what a great teacher of mathematics, R. L. Moore, suggested:</p>
 <blockquote class="blockquote">
-<p>When the Python <strong>interpreter</strong> (the <code>python</code> executable on your computer) encounters a <code>def</code> statement in your Python script or REPL, it <strong>compiles</strong> the function body, creating a function object.</p>
+<p>Read the problem statement. Try to solve it. Take your time. If you can’t solve it, and a solution is available, peek at the first line of the solution. Go back to working on your own. If you are unsuccessful, repeat the process with the subsequent lines of the published solution.</p>
 </blockquote>
-<p>This statement subtly describes the dual nature of <code>python</code> (the name of a program in an executable form), which is both a compiler and an interpreter. It also prompted me to reexamine <em>compilation</em> and <em>interpretation</em> in the context of programming languages. I had always encountered these terms. I simply asked myself: <strong>Do I understand these terms and the difference between them now?</strong></p>
-<p>This blog-post answers that question.</p>
-<p>First, let’s look up the <em>contemporary</em> dictionary meanings of the two verbs: <em>compile</em> and <em>interpret</em>. I have stated the meanings most relevant in a computing context in boldface.</p>
+<p>That is what I decided then. Although Thompson has apparently worked out the solution during his speech, I haven’t read that speech completely. I stopped reading the transcript after I read the following:</p>
+<blockquote class="blockquote">
+<p><strong>STAGE I</strong></p>
+<p>In college, before video games, we would amuse ourselves by posing programming exercises. One of the favorites was <em>to write the shortest self-reproducing program</em>. Since this is an exercise divorced from reality, the usual vehicle was FORTRAN. Actually, FORTRAN was the language of choice for the same reason that three-legged races are popular.</p>
+<p>More precisely stated, the problem is <strong>to write a source program that, when compiled and executed, will produce as output an exact copy of its source</strong>. <em>If you have never done this, I urge you to try it on your own</em>.</p>
+</blockquote>
+<section id="attempt-1-naivete-sometime-in-2023" class="level4">
+<h4 class="anchored" data-anchor-id="attempt-1-naivete-sometime-in-2023">Attempt #1: Naivete (Sometime in 2023)</h4>
+<p>I have not written such a program. Thompson <em>urges</em> us to try it on our own.</p>
+<p>I have started seeing why this is a hard problem.</p>
+<p>However, my first problem-solving attempts are usually sloppy. I thought: Well, why not write C source file <code>one.c</code> with code to read a file (<code>one.c</code> itself) line by line and write the read line to the stdout?</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>f <span class="op">=</span> fopen<span class="op">(</span><span class="st">"one.c"</span><span class="op">,</span> <span class="st">"r"</span><span class="op">);</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> buf<span class="op">[</span><span class="dv">1024</span><span class="op">];</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(!</span>f<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        perror<span class="op">(</span><span class="st">"one.c"</span><span class="op">);</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>fgets<span class="op">(</span>buf<span class="op">,</span> <span class="kw">sizeof</span> buf<span class="op">,</span> f<span class="op">)</span> <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        fputs<span class="op">(</span>buf<span class="op">,</span> stdout<span class="op">);</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>f<span class="op">);</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Compiling (<code>gcc one.c</code>) and executing (<code>./a.out</code>) this program on my Linux machine produces an exact copy of <code>one.c</code> to the stdout.</p>
+<p>Of course, I cringed at my ‘solution’. How could Thompson ask such a problem while giving his Turing Award lecture? Am I being a dope? Am I either ignoring or not understanding Thompson’s hint (“produce the shortest <em>self-replicating</em> program)?</p>
+<p>When I showed this to ChatGPT, it said, “That’s cheating, you are not supposed to read or write any files from or to the disk.”</p>
+<p>It already knew about such problems. Oracular, it even told me that such a problem was called a <em>Quine</em>, named so after a logician by the same name.</p>
+<p>I was amazed by ChatGPT’s knowledge (should we say understanding?), but did not carry on with it further. I vowed to solve it <em>the right way</em> on my own.</p>
+</section>
+<section id="attempt-2-revival-after-two-years-01-december-2025" class="level4">
+<h4 class="anchored" data-anchor-id="attempt-2-revival-after-two-years-01-december-2025">Attempt #2: Revival After Two Years (01 December 2025)</h4>
+<p>Fast forward to last night. I kept thinking about this problem once in a while in the last two years. However, didn’t obsess enough over it. Looks like it doesn’t go away, and I don’t want to seek an answer from ChatGPT or Gemini. I don’t want to read ahead in the transcript either.</p>
+<p>My sleep was disturbed just a little around 3.40 am. I was still sleepy, but realized that this problem popped into my head. I decided to see if some fabled insight comes or the obsession hums a lullaby. Maybe a <a href="./compilers-interpreters.html">recent blog post about compilers</a> was fresh in my subconscious?</p>
+<p>Let me take a step back. Let’s commit to writing C. Ken wants us to write C source program, denoted <code>P</code> that, <em>when compiled and executed</em>_, prints <code>P</code> to <code>stdout</code>.</p>
+<p>Consider a simple C program that includes a <em>call to the function that prints its arguments to <code>stdout</code></em>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"</span><span class="sc">%s\n</span><span class="st">"</span><span class="op">,</span> <span class="st">"Hello, World!"</span><span class="op">);</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Compiling and executing this program produces the following to the <code>stdout</code> (ignore the initial white-space):</p>
+<pre><code>Hello, World!
+</code></pre>
+<p>It only prints <em>verbatim</em> to the <code>stdout</code> the second argument to <code>printf</code>.</p>
+<p><strong>How can we capture the entire file’s source code within its own part?</strong></p>
+<p>Here is a naive attempt:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"</span><span class="sc">%s\n</span><span class="st">"</span><span class="op">,</span> <span class="st">"#include&lt;stdio.h&gt;</span><span class="sc">\n</span><span class="st">int main(void) {</span><span class="sc">\n</span><span class="st">    printf()</span><span class="sc">\n</span><span class="st">}"</span><span class="op">);</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Compiling and executing this program produces the following to the <code>stdout</code> (ignore the initial white-space):</p>
+<pre><code>#include&lt;stdio.h&gt;
+int main(void) {
+    printf()
+}</code></pre>
+<p>Clearly, this does not exactly match the source.</p>
+<p>The recursive (self-referencing) nature of this program dawned on me. Even if I declare a variable to hold a string that I pass to <code>printf</code> as the second argument, the problem remains: A string can not fit into its proper substring.</p>
+<p>Could it be related to some parsing, abstract syntax tree, or compilation magic?</p>
+<p>What C source line(s) might produce an executable machine code that, when run, reproduces those source lines on the <code>stdout</code>?</p>
+<p>Am I missing some background theory of such programs? Do I head to the venerable ‘<a href="https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools">Dragon Book</a>’ or the like?</p>
+<p>Does it have to do with functions in programming languages (in particular, the <code>print</code> function), how the stored-program computer works, or what?</p>
+</section>
+<section id="attempt-3-suspicion-02-december-2025" class="level4">
+<h4 class="anchored" data-anchor-id="attempt-3-suspicion-02-december-2025">Attempt #3: Suspicion (02 December 2025)</h4>
+<p>No real progress yet.</p>
+<p>I drew a diagram like this (augment the web browser window, or hold the phone in portrait mode if it appears garbled):</p>
+<pre class="text"><code>         +------------+          +------------+               
+         |            |          |            |
+a.c ---&gt; |  compiler  |--a.out--&gt;|  computer  |---&gt; a.c
+         |            |          |            |
+         +------------+          +------------+</code></pre>
+<p>In this view, if <code>compiler</code> is a mathematical function, <code>computer</code> is its inverse function!</p>
+<section id="flash-of-insight-or-detour" class="level5">
+<h5 class="anchored" data-anchor-id="flash-of-insight-or-detour">Flash of Insight or Detour?</h5>
+<p>Should I suspect the compiler? Is the compiler doing something extra? Is it</p>
 <ol type="1">
-<li><strong>Compile (v.)</strong>: 1) get or gather together (synonym: to accumulate), 2) put together out of existing material (e.g.&nbsp;compile a list), or 3) <strong>use a computer program (a “compiler”) to translate source code written in a particular programming language into computer-readable machine code that can be executed</strong>.</li>
-<li><strong>Interpret (v.)</strong>: 1) make sense of; assign meaning to (e.g.&nbsp;interpret a message) 2) give rendition of (e.g.&nbsp;a Beethoven sonata) 3) create an image or likeness of (synonym: to represent) 3) <strong>restate words from one language into another language (synonym: to translate)</strong>, or 4) make sense of a language.</li>
+<li>reading the source (<code>a.c</code>),</li>
+<li>ignoring what the program is actually supposed to do when run,</li>
+<li>creating the machine code to copy the source it read to the output?</li>
 </ol>
-<p>Aren’t the relevant definitions confusing? Don’t they mean the same thing (to translate)? Restating (modified slightly to suit Python, although it doesn’t matter) them:</p>
-<ol type="1">
-<li><strong>Compile</strong>: Use the <code>python</code> executable to translate a complete Python program into the Intel microprocessor’s machine code (instructions) which can be later <em>run</em> or <em>executed</em>.</li>
-<li><strong>Interpret</strong>: Use the <code>python</code> executable to translate or restate the words from Python (e.g.&nbsp;an assignment like <code>x = 20</code>) into another language like Intel microprocessor’s (x86 64) machine code (something <a href="http://ref.x86asm.net/coder64.html#xC7">like</a> <code>48 c7 c0 01 00 00 00</code> encoded in binary) and run it, so that actual physical changes occur at the semiconductor level! This is like how a human interpreter interprets a foreign president’s response for the native speakers to <em>understand</em>.</li>
-</ol>
-<p>When a program <em>runs</em> on a computer, the CPU simply executes corresponding instructions one by one. A runnable program is a file with 0s and 1s (binary). It is also called an <em>executable</em>. The executable then contains a sequence of machine code instructions.</p>
-<p><strong>Thus, the CPU is the ultimate interpreter or executor which runs instructions in its machine code corresponding to any program</strong>. The CPU does <em>not</em> translate the program written in computer’s RAM in a ‘language’ like <code>48 c7 c0 01 00 00 00</code> into some other language, but it, like a faithful and unerring servant, “directly makes sense of it” by taking actions in the hardware (thus <em>interpreting</em> it–See meaning #1 of <em>interpret</em> above).</p>
-<p>For <em>our</em> program, written in any language other than the machine code, to do anything on a physical machine, therefore, we need two things:</p>
-<ol type="1">
-<li>Our program’s code somehow <strong>translated</strong> into a binary machine code (instructions for a CPU).</li>
-<li>A CPU that <strong>interprets</strong> or makes sense of it by taking the instructed actions.</li>
-</ol>
-<p>We now have more nuanced definitions:</p>
-<ol type="1">
-<li><strong>Compile</strong>: Translate something from one <em>formal</em> language into another. Formal languages, unlike natural languages, have <em>unambiguous grammars</em>.</li>
-<li><strong>Interpret</strong>: Make sense of (well-defined) instructions in a language by taking actions intended therein.</li>
-</ol>
-<p>Until about the 70s (and of course even now), we had a programming language like C in which programmers wrote their programs, a compiler like the <code>gcc</code> (which is itself a big program written in C and compiled into a computer’s machine code) that <em>compiled</em> those C programs into a computer’s machine code, and a machine that <em>interpreted</em> that machine code. A typical workflow of an application programmer was straightforward:</p>
-<ol type="1">
-<li><em>Create</em> a C program file, <code>a.c</code>. This file is not <em>executable</em>. It contains the C source code.</li>
-<li><em>Compile</em> it: For example, <code>gcc a.c</code>. This creates an <em>executable</em> file <code>a.out</code> which has all the machine instructions. The compiler ensures that <code>a.c</code> is <em>valid</em> C code, and <code>a.out</code> is valid machine code. Compilers stand on a firm basis of formal, theoretical, mathematical foundation; it is one of the best understood parts of Computer Science.</li>
-<li><em>Run</em> the executable file: <code>./a.out</code> which transfers (<em>loads</em>) the instructions in computer’s memory. We didn’t call this step <em>interpretation</em>, although the computer makes sense of (interprets) those instructions.</li>
-</ol>
-<p>This required that different computers had different compilers, although the C program file was the same. You could give your little C program, <code>a.c</code> (not <code>a.out</code>, because it was for <em>your</em> computer), to your friend on a floppy, and s/he would compile it on their computer (which may be different from yours) to, say, <code>a.exe</code>, and run it.</p>
-<p>What is a compiler like <code>gcc</code> then? Clearly, it must be a program, an executable file that has all the instructions for the machine. When run, its job is to take your C program and produce a corresponding executable. There is of course a <a href="https://bootstrappable.org/">bootstrapping problem</a> here if <code>gcc</code> were <em>not</em> available as a sequence of machine instructions. If <code>gcc</code> was the name of the executable program that was created by compiling a C (or other language) source program, then we must compile that source program somehow! For now, let’s assume that <code>gcc</code> exists.</p>
-<p>Later, perhaps in the early 90s, the idea of a writing computer programs for a <em>virtual machine</em> came along. We’ll not go into the benefits of this idea here.</p>
-<p>The advent of virtual machines made the term ‘interpreter’ more well-known. Now, <strong>a compiler translated programs from a source language into an instruction language, not for any physical machine, but for a virtual machine</strong>. The instructions for the virtual machine were called the <em>bytecode</em>.</p>
-<p>A compiler for the virtual machine creates its bytecode from a program in some high-level language (like, for example, Python).</p>
-<p>An interpreter interprets (makes sense of) the bytecode (for example, the Python <em>bytecode</em>) by transparently translating it into the machine code of a given physical computer.</p>
-<p>Two notable programming languages developed with a virtual machine in mind are Python and Java. Let’s consider Java first. An application programmer’s workflow now becomes slightly more complicated:</p>
-<ol type="1">
-<li><em>Create</em> a Java program file, <code>A.java</code>. This file is not <em>executable</em>. It contains the Java source code.</li>
-<li><em>Compile</em> <code>A.java</code> using another executable program on your computer, <code>javac</code>: This creates another file, called the Java class file, named <code>A.class</code>, which has all the bytecode (instructions) <strong>for the Java virtual machine</strong>. <code>A.class</code> can not be executed (or run) on any physical computer all by itself.</li>
-<li><em>Run</em> <code>A.class</code> by using yet another executable program on your computer, <code>java</code>: This does not create any file. The <code>java</code> program simply interprets the bytecode in <code>A.class</code> by transparently translating it into the machine code for a given physical computer (CPU), which executes it. The fact remains. <strong>CPU is the ultimate interpreter</strong>. However, there is no separate step, “running the executable file”.</li>
-</ol>
-<p>For Java, <code>javac</code> is the compiler of your Java program, <code>java</code> is the interpreter of the corresponding bytecode. The bytecode is transparently translated into the machine code. CPU is the ultimate interpreter of the machine code.</p>
-<p>For Python, <code>python</code> is both the compiler and the interpreter. The two distinct functions are merged into one executable program that compiles and interprets your Python program. The bytecode is transparently translated into the machine code. CPU is the ultimate interpreter of the machine code.</p>
-<p>Consider a simple Python program:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="kw">def</span> square(n):</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span>    <span class="cf">return</span> n<span class="op">*</span>n</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> s <span class="op">=</span> square(<span class="dv">5</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span> <span class="bu">print</span>(s)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>When the <code>python</code> executable encounters a function, the <code>def</code> statement (line <code>1</code>), it first compiles the function named <code>square</code> to the bytecode (remember, <code>python</code> is both a compiler and an interpreter) for the Python virtual machine. A subsequent <em>call</em> to that function (via its bytecode corresponding to the line <code>3</code>) tells the <code>python</code> interpreter to interpret the function’s bytecode compiled previously.</p>
-<p>The <code>python</code> interpreter is a big program written in C, compiled by someone else. You <em>run</em> it on a given computer (just like you ran <code>a.out</code> compiled from your <code>a.c</code> above). Its source code (at a high-level) looks like this:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(;;)</span> <span class="op">{</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">switch</span> <span class="op">(</span>opcode<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="co">/* cases refer to actual bytecodes in a hidden file */</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> LOAD_CONST<span class="op">:</span> <span class="op">...</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> CALL<span class="op">:</span> <span class="op">...</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> RETURN_VALUE<span class="op">:</span> <span class="op">...</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="op">...</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>The situation is subtly different when your code calls a Python builtin function like <code>print</code> (line <code>4</code>) or <code>sum</code>: Unlike <code>square</code>, there is no <em>bytecode</em> available for <code>print</code>. Instead, the interpreter has access to its machine code, which was previously compiled. <code>python</code> interpreter then cedes the control to the CPU which interprets that machine code.</p>
-<p>See <a href="https://cs.stackexchange.com/a/148444/10496">this answer on Computer Science StackExchange</a> for more details.</p>
-<p>That’s it.</p>
-<p>There are of course more complications aimed at running programs more efficiently, but the gist is that compilers are fast translators of source code into machine code, <em>requiring a separate loading/running/execution step on a given machine</em> and interpreters are comparatively slower translators of source code into machine code so as to <em>not require a separate execution step</em>.</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
