@@ -17,7 +17,7 @@ execute:
   enabled: true
   echo: false
   warning: false
-  freeze: false
+  freeze: auto 
 
 format:
   html:
