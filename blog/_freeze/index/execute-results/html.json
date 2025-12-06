@@ -1,10 +1,10 @@
 {
-  "hash": "bf51e9c8758b9ad9e45d919157c0ed2d",
+  "hash": "178d72146a8383fd80bce63bd809d56d",
   "result": {
     "engine": "jupyter",
     "markdown": "---\ntitle: Welcome to an Artificial Blog\n---\n\n\nI maintain a blog here. The blog posts pertain to my research interests.\n\nEach blog post is a Jupyter notebook.\n\n\n::: {#7c24fb22-ebc0-4ba4-8bdf-9432fed8a456 .cell execution_count=1}\n\n::: {.cell-output .cell-output-display .cell-output-markdown}\n- [On Compilers and Interpreters (30 November 2025)](compilers-interpreters.html)\n:::\n\n::: {.cell-output .cell-output-display .cell-output-markdown}\n- [Capturing My Attempts to Solve an Intriguing Programming Problem (From 2020 Onward)](kentq.html)\n:::\n\n::: {.cell-output .cell-output-display .cell-output-markdown}\n- [Hello, World!](say-hi.html)\n:::\n:::\n\n\n\n",
     "supporting": [
-      "index_files"
+      "index_files/figure-html"
     ],
     "filters": [],
     "includes": {}

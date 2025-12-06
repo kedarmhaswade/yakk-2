@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Capturing My Attempts to Solve an Intriguing Programming Problem (From 2020 Onward) – Yakk-2 Artificial Blog</title>
+<title>Welcome to an Artificial Blog – Yakk-2 Artificial Blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,41 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -292,7 +257,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link active" href="./index.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
@@ -326,7 +291,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Capturing My Attempts to Solve an Intriguing Programming Problem (From 2020 Onward)</h1>
+<h1 class="title">Welcome to an Artificial Blog</h1>
 </div>
 
 
@@ -343,114 +308,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Typically, you write in a blog post about a specific topic and conclude crisply. The process of writing a typical blog post may also not span more than a few days. On this blog, I intend to write blog posts like that. I even started adding dates to their titles to suggest how long they took.</p>
-<p>This blog post, however, is unusual. It’s a <em>journal blog post</em>. I plan to narrate my (long) struggle with an intriguing problem. Capturing the writer’s struggles in words, as a hypothetical, omniscient mental and physical monitoring camera might relentlessly do, is challenging. I want to be honest, and provide enough details. To keep things simple, I will capture my thought processes, rays of hope flashed by in the wee hours of dawns, etc., as shorter, chronological sub-posts below.</p>
-<p>It is not an unsolved problem. People have solved it. However, until I solve it all by myself, it is unsolved for me.</p>
-<p>I had heard the problem statement a few years ago, and I have not been able to solve it yet. I was not working solely on this problem all this time, but I can say that I have been <em>obsessed</em> with it. No line of attack is in sight even now. I can barely withstand the emotional burden of being unable to solve this problem, despite being a CS graduate and professional programmer, but it is becoming unbearable.</p>
-<p>I suspect it is an advanced programming problem. Advanced problems assume some background knowledge. For example, a calculus-1 problem is ‘advanced’ for a high schooler who hasn’t yet grasped the ideas of school algebra and mathematical functions. The same problem may not be ‘advanced’ for a math major.</p>
-<p>Nobody posed this problem to me in person; I read its statement online. I can only judge its maturity level from its context: Ken Thompson, a master programmer and recipient of the <a href="https://en.wikipedia.org/wiki/Turing_Award">ACM Turing Award</a>, posed it during his acceptance speech of the award in 1983. He gradually solved this problem during that speech. By the time his speech ended, we had its solution (and a few other things to ponder about).</p>
-<p>Does that make you nervous? Does the shear <em>intellectual weight</em> of the problem poser and that occasion imply we should read “some theory” first, solve textbook exercises and problems, and only then attempt it?</p>
-<p>Or I can do what a great teacher of mathematics, R. L. Moore, suggested:</p>
-<blockquote class="blockquote">
-<p>Read the problem statement. Try to solve it. Take your time. If you can’t solve it, and a solution is available, peek at the first line of the solution. Go back to working on your own. If you are unsuccessful, repeat the process with the subsequent lines of the published solution.</p>
-</blockquote>
-<p>That is what I decided then. Although Thompson has apparently worked out the solution during his speech, I haven’t read that speech completely. I stopped reading the transcript after I read the following:</p>
-<blockquote class="blockquote">
-<p><strong>STAGE I</strong></p>
-<p>In college, before video games, we would amuse ourselves by posing programming exercises. One of the favorites was <em>to write the shortest self-reproducing program</em>. Since this is an exercise divorced from reality, the usual vehicle was FORTRAN. Actually, FORTRAN was the language of choice for the same reason that three-legged races are popular.</p>
-<p>More precisely stated, the problem is <strong>to write a source program that, when compiled and executed, will produce as output an exact copy of its source</strong>. <em>If you have never done this, I urge you to try it on your own</em>.</p>
-</blockquote>
-<section id="attempt-1-naivete-sometime-in-2023" class="level4">
-<h4 class="anchored" data-anchor-id="attempt-1-naivete-sometime-in-2023">Attempt #1: Naivete (Sometime in 2023)</h4>
-<p>I have not written such a program. Thompson <em>urges</em> us to try it on our own.</p>
-<p>I have started seeing why this is a hard problem.</p>
-<p>However, my first problem-solving attempts are usually sloppy. I thought: Well, why not write C source file <code>one.c</code> with code to read a file (<code>one.c</code> itself) line by line and write the read line to the stdout?</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">FILE</span> <span class="op">*</span>f <span class="op">=</span> fopen<span class="op">(</span><span class="st">"one.c"</span><span class="op">,</span> <span class="st">"r"</span><span class="op">);</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> buf<span class="op">[</span><span class="dv">1024</span><span class="op">];</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(!</span>f<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        perror<span class="op">(</span><span class="st">"one.c"</span><span class="op">);</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>fgets<span class="op">(</span>buf<span class="op">,</span> <span class="kw">sizeof</span> buf<span class="op">,</span> f<span class="op">)</span> <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        fputs<span class="op">(</span>buf<span class="op">,</span> stdout<span class="op">);</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    fclose<span class="op">(</span>f<span class="op">);</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Compiling (<code>gcc one.c</code>) and executing (<code>./a.out</code>) this program on my Linux machine produces an exact copy of <code>one.c</code> to the stdout.</p>
-<p>Of course, I cringed at my ‘solution’. How could Thompson ask such a problem while giving his Turing Award lecture? Am I being a dope? Am I either ignoring or not understanding Thompson’s hint (“produce the shortest <em>self-replicating</em> program)?</p>
-<p>When I showed this to ChatGPT, it said, “That’s cheating, you are not supposed to read or write any files from or to the disk.”</p>
-<p>It already knew about such problems. Oracular, it even told me that such a problem was called a <em>Quine</em>, named so after a logician by the same name.</p>
-<p>I was amazed by ChatGPT’s knowledge (should we say understanding?), but did not carry on with it further. I vowed to solve it <em>the right way</em> on my own.</p>
-</section>
-<section id="attempt-2-revival-after-two-years-01-december-2025" class="level4">
-<h4 class="anchored" data-anchor-id="attempt-2-revival-after-two-years-01-december-2025">Attempt #2: Revival After Two Years (01 December 2025)</h4>
-<p>Fast forward to last night. I kept thinking about this problem once in a while in the last two years. However, didn’t obsess enough over it. Looks like it doesn’t go away, and I don’t want to seek an answer from ChatGPT or Gemini. I don’t want to read ahead in the transcript either.</p>
-<p>My sleep was disturbed just a little around 3.40 am. I was still sleepy, but realized that this problem popped into my head. I decided to see if some fabled insight comes or the obsession hums a lullaby. Maybe a <a href="./compilers-interpreters.html">recent blog post about compilers</a> was fresh in my subconscious?</p>
-<p>Let me take a step back. Let’s commit to writing C. Ken wants us to write C source program, denoted <code>P</code> that, <em>when compiled and executed</em>, prints <code>P</code> to <code>stdout</code>.</p>
-<p>Consider a simple C program that includes a <em>call to the function that prints its arguments to <code>stdout</code></em>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"</span><span class="sc">%s\n</span><span class="st">"</span><span class="op">,</span> <span class="st">"Hello, World!"</span><span class="op">);</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Compiling and executing this program produces the following to the <code>stdout</code> (ignore the initial white-space):</p>
-<pre><code>Hello, World!
-</code></pre>
-<p>It only prints <em>verbatim</em> to the <code>stdout</code> the second argument to <code>printf</code>.</p>
-<p><strong>How can we capture the entire file’s source code within its own part?</strong></p>
-<p>Here is a naive attempt:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"</span><span class="sc">%s\n</span><span class="st">"</span><span class="op">,</span> <span class="st">"#include&lt;stdio.h&gt;</span><span class="sc">\n</span><span class="st">int main(void) {</span><span class="sc">\n</span><span class="st">    printf()</span><span class="sc">\n</span><span class="st">}"</span><span class="op">);</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Compiling and executing this program produces the following to the <code>stdout</code> (ignore the initial white-space):</p>
-<pre><code>#include&lt;stdio.h&gt;
-int main(void) {
-    printf()
-}</code></pre>
-<p>Clearly, this does not exactly match the source.</p>
-<p>The recursive (self-referencing) nature of this program dawned on me. Even if I declare a variable to hold a string that I pass to <code>printf</code> as the second argument, the problem remains: A string can not fit into its proper substring.</p>
-<p>Could it be related to some parsing, abstract syntax tree, or compilation magic?</p>
-<p>What C source line(s) might produce an executable machine code that, when run, reproduces those source lines on the <code>stdout</code>?</p>
-<p>Am I missing some background theory of such programs? Do I head to the venerable ‘<a href="https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools">Dragon Book</a>’ or the like?</p>
-<p>Does it have to do with functions in programming languages (in particular, the <code>print</code> function), how the stored-program computer works, or what?</p>
-</section>
-<section id="attempt-3-suspicion-02-december-2025" class="level4">
-<h4 class="anchored" data-anchor-id="attempt-3-suspicion-02-december-2025">Attempt #3: Suspicion (02 December 2025)</h4>
-<p>No real progress yet.</p>
-<p>I drew a diagram like this (augment the web browser window, or hold the phone in portrait mode if it appears garbled):</p>
-<pre class="text"><code>         +------------+          +------------+               
-         |            |          |            |
-a.c ---&gt; |  compiler  |--a.out--&gt;|  computer  |---&gt; a.c
-         |            |          |            |
-         +------------+          +------------+</code></pre>
-<p>In this view, if <code>compiler</code> is a mathematical function, <code>computer</code> is its inverse function!</p>
-<section id="flash-of-insight-or-detour" class="level5">
-<h5 class="anchored" data-anchor-id="flash-of-insight-or-detour">Flash of Insight or Detour?</h5>
-<p>Should I suspect the compiler? Is the compiler doing something extra (or mischievous)? Is it</p>
-<ol type="1">
-<li>reading the source (<code>a.c</code>),</li>
-<li>ignoring what the program is actually supposed to do when run,</li>
-<li>creating the machine code to copy the source it read to the output?</li>
-</ol>
-<p>But how could the faithful compiler do something like this?</p>
-</section>
-</section>
-<section id="attempt-4-more-of-the-same-03-december-2025" class="level4">
-<h4 class="anchored" data-anchor-id="attempt-4-more-of-the-same-03-december-2025">Attempt #4: More of the Same? (03 December 2025)</h4>
-<p>Rubbish (that line of thinking above)!</p>
-<p>A compiler is a well-defined, formal computer program. If it were to do the above with one <code>a.c</code>, it must do the same with another <code>b.c</code>, which is <em>not at all a program</em> that, when compiled and run, produces its own source.</p>
-<p>So, the magic must be in <code>a.c</code>. Even so, can the magic lie entirely in <code>a.c</code>? I am at my wits’ end. I also want to read Python; there are several things due at this hour. I will revisit this. Hopefully, my context-switch is not too expensive …</p>
+<p>I maintain a blog here. The blog posts pertain to my research interests.</p>
+<p>Each blog post is a Jupyter notebook.</p>
+<div id="7c24fb22-ebc0-4ba4-8bdf-9432fed8a456" class="cell" data-execution_count="1">
+<div class="cell-output cell-output-display cell-output-markdown">
+<ul>
+<li><a href="compilers-interpreters.html">On Compilers and Interpreters (30 November 2025)</a></li>
+</ul>
+</div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<ul>
+<li><a href="kentq.html">Capturing My Attempts to Solve an Intriguing Programming Problem (From 2020 Onward)</a></li>
+</ul>
+</div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<ul>
+<li><a href="say-hi.html">Hello, World!</a></li>
+</ul>
+</div>
+</div>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
