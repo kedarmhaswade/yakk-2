@@ -17,7 +17,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: 3.14
+          python-version: 3.12
 
       - name: Install dependencies
         run: |
@@ -28,11 +28,10 @@ jobs:
         run: make build
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v7
+        uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./blog
           publish_branch: gh-pages
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
-
