@@ -6,13 +6,17 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
 jobs:
-  build-and-publish:
+  build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
 
     steps:
       - name: Checkout repository
@@ -23,7 +27,7 @@ jobs:
         with:
           python-version: "3.14"
 
-      - name: Install Python deps for notebooks
+      - name: Install Python deps
         run: |
           python -m pip install --upgrade pip
           pip install jupyter ipykernel nbformat
@@ -31,9 +35,9 @@ jobs:
       - name: Clean previous site
         run: rm -rf blog/ || true
 
-      - name: Generate site (run build script)
+      - name: Build/generate site
         run: |
-          # If you already keep ./blog in the repo skip or ensure this doesn't remove it
+          # run your build script which must write files into ./blog
           python3 build_script.py || true
 
       - name: Verify generated site (fail if empty)
@@ -47,29 +51,33 @@ jobs:
             exit 1
           fi
 
-      - name: Remove symlinks under ./blog (required for Pages artifact)
+      - name: Remove symlinks (avoid Pages artifact rejection)
         run: |
           echo "Removing symlinks under ./blog (if any)"
           find blog -type l -print -delete || true
 
-      - name: Remove common temp/checkpoint files
+      - name: Cleanup common temp files
         run: |
           find blog -name ".DS_Store" -delete || true
           find blog -name ".ipynb_checkpoints" -type d -exec rm -rf {} + || true
-          # remove any .git dir inside blog (not required but safe)
-          find blog -name ".git" -type d -exec rm -rf {} + || true
 
-      - name: Show large files (informational)
-        run: |
-          echo "Largest files under ./blog (top 20):"
-          (find blog -type f -exec du -h {} + | sort -hr | head -n 20) || true
-
-      - name: Deploy to gh-pages branch
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-artifact@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./blog
-          publish_branch: gh-pages
-          user_name: github-actions[bot]
-          user_email: 41898282+github-actions[bot]@users.noreply.github.com
-          keep_files: false
+          name: github-pages
+          path: ./blog
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy-pages.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deploy-pages
+        uses: actions/deploy-pages@v4
