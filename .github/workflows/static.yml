@@ -40,7 +40,7 @@ jobs:
           # this must create files under ./blog
           python3 build_script.py || true
 
-      - name: Debug: list symlinks before sanitizing
+      - name: Debug list symlinks before sanitizing
         run: |
           echo "Symlinks (if any) under ./blog:"
           find blog -type l -print || true
