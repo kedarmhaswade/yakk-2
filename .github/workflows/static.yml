@@ -24,27 +24,32 @@ jobs:
 
       - name: Install Python deps for notebooks
         run: |
+          python -m pip install --upgrade pip
           pip install jupyter ipykernel nbformat
-          python -m ipkernel install --user --name python3
 
       - name: Clean previous site
         run: rm -rf blog/ || true
 
-      # ---------------------------------------------------
-      # 📌 Convert all blog notebooks in "blog/"
-      # ---------------------------------------------------
-      - name: Normalize notebooks
+      - name: Generate site (if needed)
         run: |
-          python3 build_script.py
+          # If you already have ./blog in the repo, remove this step or ensure it doesn't overwrite
+          python3 build_script.py || true
 
-      - name: Verify generated site (debug)
+      - name: Verify generated site (fail if empty)
         run: |
           echo "Contents of blog/"
-          ls -la blog || true
+          if [ -d blog ] && [ "$(ls -A blog)" ]; then
+            ls -la blog
+          else
+            echo "::error::No files found in ./blog — upload will fail"
+            ls -la || true
+            exit 1
+          fi
 
       - name: Upload GitHub Pages artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
+          name: github-pages
           path: ./blog
 
   deploy:
@@ -58,11 +63,6 @@ jobs:
       url: ${{ steps.deploy-pages.outputs.page_url }}
 
     steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: github-pages
-          path: ./blog
       - name: Deploy to GitHub Pages
         id: deploy-pages
         uses: actions/deploy-pages@v4
