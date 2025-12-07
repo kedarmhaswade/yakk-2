@@ -38,7 +38,7 @@ jobs:
           python3 build_script.py || true
 
       - name: Upload GitHub Pages artifact (sanitized)
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: github-pages
           path: blog
