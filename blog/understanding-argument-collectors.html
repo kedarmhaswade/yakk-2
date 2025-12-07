@@ -1,0 +1,124 @@
+<link href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.css" rel="stylesheet"/>
+<!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/tuftsweb/tufts.css@main/tufts.min.css">-->
+<link href="style.css" rel="stylesheet"/>
+<nav class="blog-nav">
+<a href="index.html">Home</a>
+</nav>
+<hr/>
+<body>
+<main>
+<div class="border-box-sizing" id="notebook" tabindex="-1">
+<div class="container" id="notebook-container">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=725d7f62-8109-43ea-b866-0c3f6cd18bd8">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="Understanding-*-and-**-in-Python-Function-Signatures">Understanding <code>*</code> and <code>**</code> in Python Function Signatures<a class="anchor-link" href="#Understanding-*-and-**-in-Python-Function-Signatures">¶</a></h1><p>date: 2025-12-05
+tags: python, functions, python functions</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0b132bf6-8213-43fe-b1f7-33de64f2ef0d">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Let's consider the positional argument collector (<code>*</code>) in its simplest form: It <em>collects</em> arguments in a tuple. The named argument collector (<code>**</code>) is similar, except that it <em>collects</em> arguments into a dictionary.</p>
+<p>There are two views of functions:</p>
+<ol>
+<li>Developer View: Held by the programmer defining the function (signature and body).</li>
+<li>User View: Held by the programmer calling the function.</li>
+</ol>
+<p>In practice, these views (or roles) are often assumed by the same person.</p>
+<p>Let's say the <em>Developer</em> wants to define a function that adds numbers.</p>
+<p>A natural signature for such a function is:</p>
+<h1 id="1)-def-add(a,-b).">1) <code>def add(a, b)</code>.<a class="anchor-link" href="#1)-def-add(a,-b).">¶</a></h1><p>A simple call to this function is: <code>s = add(3, 4)</code>.</p>
+<p>Since addition is associative, we can also add more than two numbers by <em>chaining</em> function calls: <code>a + b + c = a + (b + c) = (a + b) + c</code>. For example, <code>add(add(3, 4), 5)</code>.</p>
+<p>To offer flexibility, the Developer can accept a list of numbers from the User. Does <em>adding</em> make sense with only one number? In arithmetic, it doesn't; the <em>addition operation is defined for</em> two operands. The Developer may also provide that flexibility -- <code>b</code> gets a <em>default</em> value 0: <code>a = a + 0</code>.</p>
+<p>Does it make sense to accept no numbers? Yes, going by the same argument: <code>0 = 0 + 0</code>; why not set both the parameters to 0 by default?</p>
+<p>The Developer, therefore, ponders this signature:</p>
+<h1 id="2)-def-add(a-=-0,-b-=-0).">2) <code>def add(a = 0, b = 0)</code>.<a class="anchor-link" href="#2)-def-add(a-=-0,-b-=-0).">¶</a></h1><p>All the following function calls are now valid:</p>
+<pre><code>add() # =&gt; evaluates to 0, but looks odd
+# bind x, y
+add(x) # =&gt; evaluates to x, looks odd
+add(x + y) # =&gt; evaluates to x + y
+</code></pre>
+<p>What if the User has a list of numbers? To use <code>add</code>, the user must write their own looping or recursive calls to sum the numbers in the list.</p>
+<p>If the Developer doesn't heed this 'requirement', their <code>add</code> function won't be perceived as useful by many Users. They might argue that the Developer is not implementing the abstract procedure conveyed by the name <em>add</em>. A function named <code>add</code> must be flexible in that it should abstract out the summing process in a variety of situations.</p>
+<p>To entertain a list or iterable of numbers, which makes the most sense when the User has more than two numbers to sum (arguably, the most frequent use case), the Developer considers</p>
+<h1 id="3)-def-add(xs-=-%5B%5D)-%23-xs:-an-iterable.">3) <code>def add(xs = []) # xs: an iterable.</code><a class="anchor-link" href="#3)-def-add(xs-=-%5B%5D)-%23-xs:-an-iterable.">¶</a></h1><p>and <em>requires</em> Users to pass an iterable that defaults to an empty list. Here's how Users call it now:</p>
+<pre><code>add() # =&gt; evaluates to 0, looks odd
+add([]) # =&gt; evaluates to 0, doesn't look that odd
+# bind x, y, z to numbers
+add([x]) # =&gt; evaluates to x
+add([x, y]) # =&gt; evaluates to x + y
+add([x, y, z]) # =&gt; evaluates to x + y + z.
+# bind xs to a list or iterable
+add(xs) # sums the list members
+
+# TypeError on passing non-iterable types
+add(x) 
+add(x, y) 
+add(x, y, z)
+</code></pre>
+<p>This is better; those who want to pass a list are happy. The function logic deals only with an iterable.</p>
+<p>However, calls like <code>add(x, y)</code> that were previously convenient (especially in rudimentary cases) are now illegal.</p>
+<p>The Developer considers supporting individual numbers and list members as arguments.</p>
+<p>The positional <em>collector</em> is now handy.</p>
+<p>The Developer considers the signature:</p>
+<h1 id="4)-def-add(*numbers).">4) <code>def add(*numbers)</code>.<a class="anchor-link" href="#4)-def-add(*numbers).">¶</a></h1><p><strong>The Developer, by the new signature, conveys to the User that the passed arguments will be collected in a tuple.</strong> Python arranges (using a special instruction, <code>CALL_FUNCTION_EX</code> in Python 3.6+) for the function to receive a tuple. Since a tuple is iterable, the function's logic can, as before, be programmed for an iterable.</p>
+<p>Here's how the User calls it now:</p>
+<pre><code>add() # =&gt; evaluates to 0
+add(54, 2) # =&gt; evaluates to 56
+add(1, 55, 2) # =&gt; evaluates to 58
+ys = [33, 55, 10]
+add(ys) # =&gt; TypeError!
+add(*ys) # =&gt; evaluates to 98, observe the preceding *
+</code></pre>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noInput" id="cell-id=ecbdf42b-610f-4fd1-91e6-c8a2f1d2977d">
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>0
+56
+58
+98
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d92a5788-d356-49c4-a1f8-5c6f27912d3e">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>However, a problem (transparent to the Python programmer) with definition #4 above is that all the arguments are passed individually and copied into a tuple available to the function body. This is rather too cumbersome (though hidden) if you already have a list or tuple, whose members you want to sum!</p>
+<p>Python standard library (as of version 3.14) uses both approaches. For the built-in function <code>sum</code>, Users must pass an iterable. For <code>max</code>, Python provides two flavors because the function definitions are overloaded. We have two flavors of <code>max</code>, one that accepts an iterable and one that accepts individual arguments.</p>
+<p>How will you design your function?</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs jp-mod-noInput" id="cell-id=af731852-b0c9-4488-9fb3-ac15d37e14cc">
+</div>
+</div>
+</div>
+</main>
+</body>
+<hr/>
+<footer class="blog-footer">
+  © 2025 Yakk-2 Blog
+</footer>

@@ -1,24 +1,28 @@
-# Run all notebooks under phase-1/ after cleaning metadata
-.PHONY: run-all clean-metadata 
-
-
-quarto-site: 
-	quarto render blog/ --execute
-
-clean-site:
-	rm -rf blog/_site
-
-
-
+# Clean notebook metadata
 clean-metadata:
-	@for f in $(shell find . -name "*.ipynb"); do \
-		echo "Cleaning metadata for $$f"; \
-		jq 'del(.metadata.jetTransient)' $$f > $$f.tmp && mv $$f.tmp $$f; \
+	@echo "Cleaning transient metadata in notebooks..."
+	@for f in $(NOTEBOOKS); do \
+	    echo "Cleaning metadata for $$f"; \
+	    jq 'del(.metadata.jetTransient)' $$f > $$f.tmp && mv $$f.tmp $$f; \
 	done
 
-run-all: clean-metadata clean-site quarto-site
-	@for f in $(shell find phase-1 -name "*.ipynb"); do \
-		echo "Running $$f"; \
-		jupyter nbconvert --to notebook --execute --inplace --allow-errors $$f || exit 1; \
-	done
+
+# Makefile for yakk-2 blog
+
+PYTHON := python3
+BUILD_SCRIPT := build_script.py
+POSTS_DIR := posts
+OUTPUT_DIR := blog
+
+.PHONY: all build clean
+
+all: build
+
+# Build blog HTML from notebooks
+build:
+	$(PYTHON) $(BUILD_SCRIPT)
+
+# Clean generated HTML files
+clean:
+	rm -rf $(OUTPUT_DIR)/*.html
 
