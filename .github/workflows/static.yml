@@ -37,12 +37,17 @@ jobs:
 
       - name: Build/generate site
         run: |
-          # run your build script which must write files into ./blog
+          # your build script must write files into ./blog
           python3 build_script.py || true
+
+      - name: Debug: show any symlinks before sanitizing
+        run: |
+          echo "Symlinks (if any) under ./blog:"
+          find blog -type l -print || true
 
       - name: Verify generated site (fail if empty)
         run: |
-          echo "Checking ./blog content"
+          echo "Contents of blog/"
           if [ -d blog ] && [ "$(ls -A blog 2>/dev/null)" ]; then
             ls -la blog
           else
@@ -51,21 +56,40 @@ jobs:
             exit 1
           fi
 
-      - name: Remove symlinks (avoid Pages artifact rejection)
+      - name: Sanitize site (dereference symlinks, avoid hardlinks)
         run: |
-          echo "Removing symlinks under ./blog (if any)"
-          find blog -type l -print -delete || true
+          SANITIZED=blog_sanitized
+          rm -rf "$SANITIZED"
+          mkdir -p "$SANITIZED"
+          # rsync -aL will copy and dereference symlinks (copies target contents)
+          rsync -aL --delete blog/ "$SANITIZED"/
+          # remove any .git dirs etc that shouldn't be published
+          find "$SANITIZED" -name ".git" -type d -exec rm -rf {} + || true
+          echo "Sanitized copy created at $SANITIZED"
+          echo "Any symlinks remaining (should be none):"
+          find "$SANITIZED" -type l -print || true
+          echo "Top level listing:"
+          ls -la "$SANITIZED" || true
 
-      - name: Cleanup common temp files
+      - name: Sanity: check for hardlinks in sanitized tree (best-effort)
+        shell: bash
         run: |
-          find blog -name ".DS_Store" -delete || true
-          find blog -name ".ipynb_checkpoints" -type d -exec rm -rf {} + || true
+          SAN=blog_sanitized
+          echo "Checking for files with link count > 1 (hardlinks):"
+          # list files with >1 link count
+          find "$SAN" -type f -printf '%n %p\n' 2>/dev/null | awk '$1>1 {print $0}' || true
 
-      - name: Upload GitHub Pages artifact
+      - name: Check size of artifact
+        run: |
+          du -sh blog_sanitized || true
+          echo "Largest files under sanitized tree (top 20):"
+          (find blog_sanitized -type f -exec du -h {} + | sort -hr | head -n 20) || true
+
+      - name: Upload GitHub Pages artifact (sanitized)
         uses: actions/upload-artifact@v4
         with:
           name: github-pages
-          path: ./blog
+          path: blog_sanitized
 
   deploy:
     needs: build
