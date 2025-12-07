@@ -25,7 +25,7 @@ jobs:
       - name: Install Python deps for notebooks
         run: |
           pip install jupyter ipykernel nbformat
-          python -m ipykernel install --user --name python3
+          python -m ipkernel install --user --name python3
 
       - name: Clean previous site
         run: rm -rf blog/ || true
@@ -36,6 +36,16 @@ jobs:
       - name: Normalize notebooks
         run: |
           python3 build_script.py
+
+      - name: Verify generated site (debug)
+        run: |
+          echo "Contents of blog/"
+          ls -la blog || true
+
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: ./blog
 
   deploy:
     runs-on: ubuntu-latest
@@ -51,3 +61,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deploy-pages
         uses: actions/deploy-pages@v4
+
