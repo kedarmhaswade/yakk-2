@@ -1,28 +1,34 @@
-# Clean notebook metadata
-clean-metadata:
-	@echo "Cleaning transient metadata in notebooks..."
-	@for f in $(NOTEBOOKS); do \
-	    echo "Cleaning metadata for $$f"; \
-	    jq 'del(.metadata.jetTransient)' $$f > $$f.tmp && mv $$f.tmp $$f; \
+.PHONY: all clean-metadata
+
+# Phases
+PHASES := phase-1 phase-2 phase-3 phase-4 phase-5
+
+# Find all notebooks
+ALL_NB := $(shell find $(PHASES) -name "*.ipynb")
+
+# Default target: execute only notebooks that have no outputs
+all:
+	@echo ">>> Executing notebooks that are not yet executed..."
+	@for nb in $(ALL_NB); do \
+		has_output=$$(python3 -c "import nbformat; nb=nbformat.read('$$nb', as_version=4); print(any(len(cell.get('outputs', []))>0 for cell in nb.cells))"); \
+		if [ "$$has_output" = "False" ]; then \
+			echo ">>> Executing $$nb"; \
+			jupyter nbconvert --to notebook --inplace \
+				--ExecutePreprocessor.timeout=300 \
+				--ExecutePreprocessor.allow_errors=True \
+				$$nb || true; \
+		else \
+			echo ">>> Skipping $$nb (already executed)"; \
+		fi \
 	done
+	@echo ">>> Done executing notebooks."
 
-
-# Makefile for yakk-2 blog
-
-PYTHON := python3
-BUILD_SCRIPT := build_script.py
-POSTS_DIR := posts
-OUTPUT_DIR := blog
-
-.PHONY: all build clean
-
-all: build
-
-# Build blog HTML from notebooks
-build:
-	$(PYTHON) $(BUILD_SCRIPT)
-
-# Clean generated HTML files
-clean:
-	rm -rf $(OUTPUT_DIR)/*.html
+# Clean transient metadata from all notebooks in phases
+clean-metadata:
+	@echo ">>> Cleaning metadata from notebooks in phase-1 to phase-5..."
+	@for nb in $(ALL_NB); do \
+		echo ">>> Cleaning metadata in $$nb"; \
+		nbstripout $$nb; \
+	done
+	@echo ">>> Done cleaning metadata."
 
