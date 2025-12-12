@@ -1,10 +1,9 @@
 .PHONY: all clean-metadata
 
-# Phases
-PHASES := phase-1 phase-2 phase-3 phase-4 phase-5
 
 # Find all notebooks
-ALL_NB := $(shell find $(PHASES) -name "*.ipynb")
+ALL_NB := $(shell find phase-1 -type f -name "*.ipynb" \
+                 ! -path "*/.ipynb_checkpoints/*") 
 
 # Default target: execute only notebooks that have no outputs
 all:
