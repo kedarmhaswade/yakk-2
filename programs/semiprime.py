@@ -29,8 +29,10 @@ def next_semiprime(sp):
 # nsp = next_semiprime(sp)
 # print(f"semiprime successor of {sp}: {nsp}, factors: {factorint(nsp)}")
 
-n = 4
-print(n)
-while n < 1_000_000:
-    n = next_semiprime(n)
-    print(n)
+sp = 4
+n = 1
+print(sp)
+while n <= 1_000_000:
+    sp = next_semiprime(sp)
+    print(sp)
+    n += 1

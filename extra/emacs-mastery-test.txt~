@@ -1,0 +1,159 @@
+C means the Ctrl key.
+M means the Meta key (usually denoted Alt)
+Shift means the Shift key.
+
+C-f means hold the Ctrl key and press the f key.
+This is Fira Code Retina.
+
+Roman (en-US) keyboard.
+
+Using C-\ to toggle to a Devanagari keyboard.
+
+ChatGPT is my guide. I like it that way.
+
+हे देवनागरी आहे! (devanagari-itrans) मला ते छान दिसते आहे!
+
+C-\
+
+Don't Save.
+
+This is English.
+नावात काय आहे? हे जोडाक्षर आहे!
+This is English again.
+
+(Move the cursor using arrow-keys and see how (size) it appears on देवनागरी characters and Roman characters).
+
+ChatGPT उवाच:
+---
+Emacs’s movement commands (C-f, arrow keys) operate on: grapheme clusters, not codepoints.
+
+That’s why:
+
+- movement feels “right”
+- deletion doesn’t tear characters apart
+- Devanagari is editable, not just displayable
+
+Emacs edits grapheme clusters, not bytes, not codepoints, not screen cells.
+In alphabetic systems like English, vowels are independent letters, so there is no vowel-sign merging. In abugida systems like Devanagari, vowels are modifying signs, which leads to grapheme clustering.
+---
+C-f move one char forward
+C-b move one char backward
+
+In त्या क्रा तिथे वन्य क्ला
+
+क्र is special because र is special.
+ल and य look similar typographically, but Unicode does not grant them conjunct status.
+
+क्ला (क् + ल + ा)
+
+ल (la) is not a conjunct-forming consonant
+
+It has no half-form
+
+Fonts may draw it ligature-like, but:
+
+Unicode does not require it to be a conjunct
+
+Therefore the sequence is treated as: [क्] + [ला]
+
+त्या (त् + य + ा)
+
+य (ya) behaves similarly
+
+It forms ya-phalaa, which is a combining letter
+
+Not a conjunct consonant
+
+Same classification outcome as ल
+
+➡ Split cursor movement
+
+In Emacs, 'point' lives in the logical structure of text, not in its visual grid.
+
+Lesson 1.2 Mark and Region
+--------------------------
+_Point_ is an abstraction: the logical structure of your text.
+_Region_ is the next abstraction: Editing is not about a cursor — it’s about selecting a region between two logical points.
+
+Vim has visual mode.
+Emacs has something more.
+
+
+ChatGPT उवाच:
+---
+Mental model (important)
+Point: where the cursor is (you already understand this deeply)
+Mark: another remembered position in the same buffer
+Region: the text between point and mark
+There is no selection object. Highlighting is just a visualization.
+---
+
+I did the Point-Mark-Region exercise.
+
+Point is where cursor blinks.
+
+C-SPC (Ctrl + Space) sets the Mark. (You should see "Mark Set" in the status bar.)
+
+Now, move the cursor. The _Region_ gets highlighted as you move the cursor after setting the Mark.
+
+The Region has two endpoints. You can jump the cursor between the endpoints using C-x C-x.
+
+
+q1- If you move point backward past the mark, what happens to the region?
+a1- The region extends backward. The Mark becomes the new end and Point becomes the new start of the Region. It's better to just know that the Region has two endpoints and C-x C-x allows you to jump between them.
+
+q2- Does Emacs care which end of the region is 'start' and which is 'end'?
+a2- No.
+
+q3- When you copy text with M-w, is the Mark cleared?
+a3- Yes. Moving the cursor after M-w does not modify the Region (there is no highlighting). This leads me to conclude that the Mark has been cleared. (This is incorrect. If you pressed C-x C-x again, the Region gets highlighted again. This means the previous Mark was _not_ cleared! Thus, after choosing a region, and pressing M-x, only the Region is deactivated, but the Mark is not cleared.)
+
+Lesson 1.3 The Kill Ring
+------------------------
+C-SPC Set the Mark
+C-x C-x Switch the Region endpoints
+C-w Kill Region
+M-w Copy Region
+C-y Yank (Paste) Region
+M-y Cycle earlier Kills
+
+Step 1 -- Populate the Kill Ring
+
+---
+What is there in the Kill Ring right now? Here is the list of sentences:
+
+c-1
+c-2
+c-3
+
+c-3
+A sentence (2)
+
+---
+
+q1- After C-y, where is point relative to the yanked text?
+a1- Just after the yanked text.
+
+q2- Does M-y work if the previous command was not C-y?
+a2- Yes. (This is not entirely correct -- M-y replaces the text inserted by the previous yank. If there's no yank, there's nothing safe to replace.) To be precise: M-y works only if the previous command is C-y or M-y. When the previous command is C-y, it replaces the previous yank. When the previous command is M-y it prompts you for which yank to choose (from a list).
+
+
+
+
+q3- Why is a ring strictly more powerful than a single clipboard?
+a3- Essentially because single clipboard is the Kill Ring with capacity 1. Clearly, the Kill Ring with its almost infinite capacity must be more powerful than a single clipboard.
+
+
+Lesson 1.4 Commands That Set The Mark Automatically
+---------------------------------------------------
+
+> Any command that 'jumps' somewhere probably sets the Mark (and some "obvious thing" becomes the Region).
+
+q1- Place Point in the middle of a paragraph. Press M-a ('jumps' to the beginning of the line; correspondingly M-e jumps to the end of the current line). Press C-x C-x. Where did you jump?
+a1- I think I jumped to the previous (latest) Mark. Here's what I think happens: I have set Marks, moved Point, .... Let's catch up with the action: C-SPC. That sets a Mark (M1). Then I move around, press M-a to go to the beginning of some line. This is where my cursor is now. That's my Point (P). Now, my Region is between M1 and P. C-x C-x will make me jump to M1.
+
+ChatGPT's correction:
+
+
+
+
